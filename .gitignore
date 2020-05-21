@@ -1,0 +1,9 @@
+**/*~
+**/*.out
+**/*.o
+**/*.s
+**/cmake-build-debug
+**/CMakeFiles
+**/.idea
+
+third/build

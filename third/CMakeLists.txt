@@ -1,0 +1,6 @@
+# cmake_minimum_required(2.0)
+project(sorting)
+cmake_minimum_required(VERSION 3.10)
+add_executable(wanshu.out wanshu.cxx)
+target_compile_options(wanshu.out PUBLIC -openmp -std=c++17 -O3)
+target_link_libraries(wanshu.out -lm -lomp)
