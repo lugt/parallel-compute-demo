@@ -4,16 +4,16 @@
 
 #include "codetimer.h"
 
-CodeTimer::CodeTimer() : m_start{std::chrono::system_clock::now()}, m_end{std::chrono::system_clock::now()}{}
+MyTTimer::MyTTimer() : m_start{std::chrono::system_clock::now()}, m_end{std::chrono::system_clock::now()}{}
 
-void CodeTimer::start() {
+void MyTTimer::start() {
   m_start = std::chrono::system_clock::now();
 }
 
-void CodeTimer::stop() {
+void MyTTimer::stop() {
   m_end = std::chrono::system_clock::now();
 }
 
-std::chrono::duration<double> CodeTimer::duration() const {
+std::chrono::duration<double> MyTTimer::duration() const {
   return m_end - m_start;
 }

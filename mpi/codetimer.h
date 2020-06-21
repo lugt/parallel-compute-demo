@@ -7,10 +7,10 @@
 
 #include <chrono>
 
-class CodeTimer
+class MyTTimer
 {
 public:
-    CodeTimer();
+    MyTTimer();
     void start();
     void stop();
     std::chrono::duration<double> duration() const;
