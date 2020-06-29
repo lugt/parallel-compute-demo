@@ -1,0 +1,9 @@
+disabled: false
+reporter:
+    localAgentHostPort: south.niimei.com:5775
+    bufferFlushInterval: 0
+    queueSize: 0
+    logSpans: true
+sampler:
+  type: const
+  param: 1
