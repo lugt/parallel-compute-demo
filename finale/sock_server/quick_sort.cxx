@@ -69,9 +69,13 @@ INT32 tracedQuickSort(ELET *arr, ELET_OFST length, INT32 level, SPTR span) {
   quicksort(arr, 0, length - 1);
   auto end1 = std::chrono::system_clock::now();
   std::chrono::duration<double> seconds = end1 - start;
-  cout << "Verification \n";
+  cout << "Verification starting \n";
+  stringstream strs;
+  strs << "order-" << "quick-" << level << ".txt";
+  ofstream of(strs.str());
   for (i = 1; i < length; i++) {
     Assert(arr[i] >= arr[i - 1], printf("Incorrect sorting result at position %d", i));
+    of << arr[i] << ((i != length - 1) ? " " : "");
   }
   cout << endl;
   cout << "Quick Sorting length = " << length << endl;
