@@ -13,7 +13,7 @@ const char *rand_file = NULL;
 /**
  * Choosing which model to use from
  */
-WorkingModule current_sortmode = NP_QUICKSORT;
+WorkingModule current_sortmode = NP_RANKSORT;
 
 namespace {
 
@@ -63,11 +63,15 @@ namespace {
                       ELET_OFST length) {
       std::string name = "traced-reduce";
       IFSORT(NP_QUICKSORT, name = "quick-sort-main")
+      IFSORT(NP_MERGESORT, name = "merge-sort-main")
+      IFSORT(NP_RANKSORT, name = "rank-sort-main")
       AS_CHILD_SPAN(span, name, parentSpan);
       std::ostringstream oss;
       oss << "length : " << length << ", Estimate : " << (log(length) * length);
       span->SetBaggageItem("params", oss.str());
       IFSORT(NP_QUICKSORT, tracedQuickSort(begin, length, parallel_level, span);)
+      IFSORT(NP_MERGESORT, tracedMergeSort(begin, length, parallel_level, span);)
+      IFSORT(NP_RANKSORT, tracedRankSort(begin, length, parallel_level, span);)
       // IFSORT(NP_MERGESORT, tracedMergeSort(span);)
       span->Finish();
     }
@@ -90,7 +94,21 @@ namespace {
 
     void tracedFunction() {
       auto span = opentracing::Tracer::Global()->StartSpan("Main.tracedFunction");
-      tracedLoop(span);
+      {
+        current_sortmode = NP_QUICKSORT;
+        AS_CHILD_SPAN(quickSpan, "quicksort-all", span);
+        tracedLoop(quickSpan);
+      }
+      {
+        current_sortmode = NP_MERGESORT;
+        AS_CHILD_SPAN(mergeSpan, "mergesort-all", span);
+        tracedLoop(mergeSpan);
+      }
+      {
+        current_sortmode = NP_RANKSORT;
+        AS_CHILD_SPAN(rankSpan, "ranksort-all", span);
+        tracedLoop(rankSpan);
+      }
       span->Finish();
     }
 

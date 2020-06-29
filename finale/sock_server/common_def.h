@@ -40,7 +40,7 @@ using std::vector;
 enum WorkingModule {
   NP_QUICKSORT,
   NP_MERGESORT,
-  NP_SELECTSORT
+  NP_RANKSORT
 };
 
 typedef int INT32;

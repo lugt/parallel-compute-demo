@@ -58,7 +58,13 @@ using REQUEST = shared_ptr<HttpServer::Request>;
 // Client group
 void testing_bandwidth_with_timer(ELET_OFST length, const char *func_name, void (*func)(SPTR), SPTR span);
 
-// Server group
+// Quick sort
 INT32 tracedQuickSort(ELET *arr, ELET_OFST length, INT32 parallel_level,SPTR span);
+
+// Rank sort
+INT32 tracedRankSort(ELET *arr, ELET_OFST length, INT32 parallel_level,SPTR span);
+
+// Merging sort
+INT32 tracedMergeSort(ELET *arr, ELET_OFST length, INT32 parallel_level,SPTR span);
 
 #endif //MEMORY_HTTP_EXAMPLES_H
